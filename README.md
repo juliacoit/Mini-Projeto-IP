@@ -14,15 +14,93 @@ Todas as funções **devem ser do tipo `void`**, e o **resultado deve ser impres
 > https://github.com/juliacoit/Mini-Projeto-IP
 
 ---
+## 🚀 **Como Executar o Programa**
+
+1. Compile o código:
+   gcc Calculadora.c -o calculadora
+2. Execute 
+    ./calculadora
+3. Após escolher as opções desejadas, digite a operação no formato:
+    a b
+
+🧠 Operações Implementadas (28 funções)
+➕ Operações Aritméticas
+
+Soma (+)
+
+Subtração (-)
+
+Multiplicação (*)
+
+Divisão (/)
+
+Resto (%)
+
+Potência (~)
+
+Fatorial (!)
+
+Média (M)
+
+🧩 Operações Bit a Bit
+
+AND (&)
+
+OR (|)
+
+XOR (^)
+
+Shift Right (>>)
+
+Shift Left (<<)
+
+📏 Intervalos
+
+Somatório (S)
+
+Produtório (P)
+
+🔍 Comparações Simples
+
+min
+
+max
+
+abs
+
+==
+
+!=
+
+<
+
+=
+
+<=
+
+🔐 Booleanas
+
+&&
+
+!&
+
+||
+
+!|
 
 ## 👥 Integrantes do Grupo
-- Nome Integrante 1 — RA / e-mail  
-- Nome Integrante 2 — RA / e-mail  
-- Nome Integrante 3 — RA / e-mail  
-- Nome Integrante 4 — RA / e-mail
+- Aryan Douglas Rodrigues — @AryanDouglas01 
+- Clara Bertão — @clarabertao
+- Eduarda Campos — @EduardaCCampos
+- Júlia Coité — @juliocoit  
+- Paulo Vitor Vieira  — @Paulim16
+- Pedro Lukas Santos  — @Iscaico
+- Sarah Godinho  — @sarocaa
+
+
 # Distribuição de Tarefas do Projeto
 
-## Pessoa 1: Funções Matemáticas Básicas
+## Eduarda: Funções Matemáticas Básicas
 - **Issue 1**: Criar repositório no GitHub e estrutura de diretórios.
 - **Issue 2**: Configuração e padrão de codificação.
 - **Issue 3**: Implementar soma (+).
@@ -32,7 +110,7 @@ Todas as funções **devem ser do tipo `void`**, e o **resultado deve ser impres
 
 ---
 
-## Pessoa 2: Funções Matemáticas Básicas + Avançadas
+## Sarah: Funções Matemáticas Básicas + Avançadas
 - **Issue 7**: Implementar resto (%).
 - **Issue 8**: Implementar potência (~).
 - **Issue 9**: Implementar fatorial (!).
@@ -40,7 +118,7 @@ Todas as funções **devem ser do tipo `void`**, e o **resultado deve ser impres
 
 ---
 
-## Pessoa 3: Operações Bit a Bit
+## Aryan: Operações Bit a Bit
 - **Issue 10**: Implementar AND bit a bit (&).
 - **Issue 11**: Implementar OR bit a bit (|).
 - **Issue 12**: Implementar XOR bit a bit (^).
@@ -49,7 +127,7 @@ Todas as funções **devem ser do tipo `void`**, e o **resultado deve ser impres
 
 ---
 
-## Pessoa 4: Funções Avançadas (Intervalos e Comparações)
+## Paulo Vitor: Funções Avançadas (Intervalos e Comparações)
 - **Issue 16**: Implementar somatório de um intervalo (S).
 - **Issue 17**: Implementar produtório de um intervalo (P).
 - **Issue 18**: Implementar mínimo entre dois números (min).
@@ -57,7 +135,7 @@ Todas as funções **devem ser do tipo `void`**, e o **resultado deve ser impres
 
 ---
 
-## Pessoa 5: Funções de Comparação Simples
+## Clara: Funções de Comparação Simples
 - **Issue 20**: Implementar valor absoluto de um número (abs).
 - **Issue 21**: Implementar igualdade (==).
 - **Issue 22**: Implementar diferença (!=).
@@ -65,7 +143,7 @@ Todas as funções **devem ser do tipo `void`**, e o **resultado deve ser impres
 
 ---
 
-## Pessoa 6: Funções de Comparação Lógica
+## Pedro Lukas: Funções de Comparação Lógica
 - **Issue 24**: Implementar menor que (<).
 - **Issue 25**: Implementar maior ou igual (>=).
 - **Issue 26**: Implementar menor ou igual (<=).
@@ -74,7 +152,7 @@ Todas as funções **devem ser do tipo `void`**, e o **resultado deve ser impres
 
 ---
 
-## Pessoa 7: Funções Booleanas + Main + Testes
+## Julia: Funções Booleanas + Main + Testes
 - **Issue 29**: Implementar OR (||).
 - **Issue 30**: Implementar NOR (!|).
 - **Issue 31**: Criar a função `main` para executar o programa em loop.
@@ -96,13 +174,13 @@ Essas tarefas podem ser feitas de forma colaborativa entre os membros ou alocada
 
 | **Pessoa**   | **Issues**                                                                                                  |
 |--------------|-------------------------------------------------------------------------------------------------------------|
-| **Pessoa 1** | Issue 1, Issue 2, Issue 3, Issue 4, Issue 5, Issue 6                                                        |
-| **Pessoa 2** | Issue 7, Issue 8, Issue 9, Issue 15                                                                         |
-| **Pessoa 3** | Issue 10, Issue 11, Issue 12, Issue 13, Issue 14                                                            |
-| **Pessoa 4** | Issue 16, Issue 17, Issue 18, Issue 19                                                                      |
-| **Pessoa 5** | Issue 20, Issue 21, Issue 22, Issue 23                                                                      |
-| **Pessoa 6** | Issue 24, Issue 25, Issue 26, Issue 27, Issue 28                                                            |
-| **Pessoa 7** | Issue 29, Issue 30, Issue 31, Issue 32, Issue 35                                                            |
+| **Eduarda** | Issue 1, Issue 2, Issue 3, Issue 4, Issue 5, Issue 6, Issue 33                                               |
+| **Sarah** | Issue 7, Issue 8, Issue 9, Issue 15                                                                            |
+| **Aryan** | Issue 10, Issue 11, Issue 12, Issue 13, Issue 14                                                               |
+| **Paulo Vitor** | Issue 16, Issue 17, Issue 18, Issue 19                                                                   |
+| **Clara** | Issue 20, Issue 21, Issue 22, Issue 23                                                                         |
+| **Pedro Lukas** | Issue 24, Issue 25, Issue 26, Issue 27, Issue 28                                                         |
+| **Julia** | Issue 29, Issue 30, Issue 31, Issue 32, Issue 35                                                               |
 
 ---
 
