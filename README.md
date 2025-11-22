@@ -24,6 +24,7 @@ Todas as funções **devem ser do tipo `void`**, e o **resultado deve ser impres
     a b
 
 🧠 Operações Implementadas (28 funções)
+
 ➕ Operações Aritméticas
 
 Soma (+)
