@@ -21,7 +21,7 @@ Todas as funções **devem ser do tipo `void`**, e o **resultado deve ser impres
 2. Execute 
     ./calculadora
 3. Após escolher as opções desejadas, digite a operação no formato:
-    a b
+    a "operação, ex: +" b
 
 🧠 Operações Implementadas (28 funções)
 
@@ -93,10 +93,10 @@ abs
 - Aryan Douglas Rodrigues — @AryanDouglas01 
 - Clara Bertão — @clarabertao
 - Eduarda Campos — @EduardaCCampos
-- Júlia Coité — @juliocoit  
+- Júlia Coité — @juliacoit  
 - Paulo Vitor Vieira  — @Paulim16
 - Pedro Lukas Santos  — @Iscaico
-- Sarah Godinho  — @sarocaa
+- Sarah Godinho  — @Sarocaa
 
 
 # Distribuição de Tarefas do Projeto
