@@ -154,7 +154,7 @@ void multiplicacao (int a, int b){
 
 void divisao (int a, int b){
     if(b != 0){
-        printf("%d / %d = %.2lf\n", a, b, (double)a / b);
+        printf("%d / %d = %.3lf\n", a, b, (double)a / b);
     } else {
         printf("Divisao invalida! Nao e possivel dividir por zero. Tente outra operacao\n");
     }
