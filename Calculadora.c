@@ -109,22 +109,22 @@ int main(){
 
         switch (saida) {
             case 1:
-                scanf("%d%*c%d", &a,&b);
+                scanf("%d %*c %d", &a,&b);
                 soma(a, b);
                 break;
 
             case 2:
-                scanf("%d%*c%d", &a,&b);
+                scanf("%d %*c %d", &a,&b);
                 subtracao(a, b);
                 break;
 
             case 3:
-                scanf("%d%*c%d", &a,&b);
+                scanf("%d %*c %d", &a,&b);
                 multiplicacao(a, b);
                 break;
 
             case 4:
-                scanf("%d%*c%d", &a,&b);
+                scanf("%d %*c %d", &a,&b);
                 divisao(a, b);
                 break;
 
