@@ -90,13 +90,13 @@ abs
 !|
 
 ## 👥 Integrantes do Grupo
-- Aryan Douglas Rodrigues — @AryanDouglas01 
-- Clara Bertão — @clarabertao
-- Eduarda Campos — @EduardaCCampos
-- Júlia Coité — @juliacoit  
-- Paulo Vitor Vieira  — @Paulim16
-- Pedro Lukas Santos  — @Iscaico
-- Sarah Godinho  — @Sarocaa
+- Aryan Douglas Rodrigues —  @AryanDouglas01 
+- Clara Bertão —  @clarabertao
+- Eduarda Campos —  @EduardaCCampos
+- Júlia Coité —  @juliacoit  
+- Paulo Vitor Vieira  —  @Paulim16
+- Pedro Lukas Santos  —  @Iscaico
+- Sarah Godinho  —  @Sarocaa
 
 
 # Distribuição de Tarefas do Projeto
