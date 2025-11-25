@@ -148,6 +148,30 @@ int main(){
                 divisao(a, b);
                 break;
 
+            case 18: 
+            //valor absoluto
+                scanf("%d", &a);
+                valor_absoluto(int a);
+                break;
+
+            case 19:
+            //igualdade
+                scanf("%d%d", &a, &b);
+                igual(a, b);
+                break;
+
+            case 20:
+            //diferença
+                scanf("%d%d", &a, &b);
+                diferente(a,b);
+                break;
+
+            case 21: 
+            //maior que
+                scanf("%d%d", &a, &b);
+                maior_que(a, b);
+                break;
+            
             default:
                 printf("Opção invalida! Tente novamente.\n");
         }
@@ -182,6 +206,26 @@ void resto (int a, int b)
 {
     printf("%d %% %d = %d\n", a, b, a%b);
 }
+void valor_absoluto(int A)
+{
+    int valor;
+    
+    valor= sqrt(A*A);
+    printf("%d\n", valor);
+}
+void igual(int A, int B){
+    if(A==B) printf("SIM\n");
+    else printf("NAO\n");
+}
+void diferente(int A, int B){
+	if(A!=B) printf("SIM\n");
+	else printf("NAO\n");
+}
+void maior_que(int A, int B){
+    if(A>B) printf("SIM\n");
+    else printf("NAO\n");
+}
+
 int main ()
 
 
