@@ -7,6 +7,9 @@ void subtracao (int a, int b);
 void multiplicacao (int a, int b);
 void divisao (int a, int b);
 void resto (int a, int b);
+void potencia (int a, int b);
+void fatorial (int a);
+void media (int a, int b);
 void valor_absoluto(int A);
 void diferente(int A, int B);
 void igual(int A, int B);
@@ -156,7 +159,7 @@ int main(){
             case 8:
             // media
                 scanf("%d %*c %d", &a,&b);
-                divisao(a, b);
+                media(a, b);
                 break;
 
             case 18: 
@@ -194,17 +197,14 @@ int main(){
 
 void soma (int a, int b){
     printf("%d + %d = %d\n", a, b, a + b);
-    
 }
 
 void subtracao (int a, int b){
     printf("%d - %d = %d\n", a, b, a - b);
-
 }
 
 void multiplicacao (int a, int b){
     printf("%d * %d = %d\n", a, b, a * b);
-
 }
 
 void divisao (int a, int b){
@@ -214,12 +214,38 @@ void divisao (int a, int b){
         printf("Divisao invalida! Nao e possivel dividir por zero. Tente outra operacao\n");
     }
 }
-void resto (int a, int b)
-{
-    printf("%d %% %d = %d\n", a, b, a%b);
+void resto (int a, int b){
+    int resto;
+    resto = a%b;
+    printf("%d %% %d = %d\n", a, b, resto);
 }
-void valor_absoluto(int A)
-{
+void potencia (int a, int b){
+    int i=1;
+    long long int pot;
+    pot = a;
+    while (i!=b){
+        pot *= a;
+        i++;
+    }
+    if(b==0) printf("%d ~ %d = 1\n", a, b);
+    else printf("%d ~ %d = %lld\n", a, b, pot);
+}
+void fatorial (int a){
+    int i;
+    long long int fat = 1;
+    for(i=a; i>1; i--){
+        fat *= i;
+    }
+    printf("%d! = %d\n", a, fat);
+}
+void media (int a, int b){
+    int sum;
+    double M;
+    sum = a + b;
+    M = sum / 2.0;
+    printf("%d M %d = %.3lf\n", a, b, M);
+}
+void valor_absoluto(int A){
     int valor;
     
     valor= sqrt(A*A);
