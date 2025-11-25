@@ -127,6 +127,26 @@ int main(){
                 scanf("%d %*c %d", &a,&b);
                 divisao(a, b);
                 break;
+            
+            case 5:
+                scanf("%d %*c %d", &a,&b);
+                resto(a, b);
+                break;
+            case 6:
+            // potencia
+                scanf("%d %*c %d", &a,&b);
+                potencia(a, b);
+                break;
+            case 7:
+            // fatorial
+                scanf("%d %*c", &a);
+                fatorial(a);
+                break;
+            case 8:
+            // media
+                scanf("%d %*c %d", &a,&b);
+                divisao(a, b);
+                break;
 
             default:
                 printf("Opção invalida! Tente novamente.\n");
@@ -158,6 +178,11 @@ void divisao (int a, int b){
     } else {
         printf("Divisao invalida! Nao e possivel dividir por zero. Tente outra operacao\n");
     }
+void resto (int a, int b)
+{
+    printf("%d %% %d = %d\n", a, b, a%b);
+}
+int main ()
 
 
 }
