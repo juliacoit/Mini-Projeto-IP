@@ -17,7 +17,7 @@ Todas as funções **devem ser do tipo `void`**, e o **resultado deve ser impres
 ## 🚀 **Como Executar o Programa**
 
 1. Compile o código:
-   gcc Calculadora.c -o calculadora
+   gcc Calculadora.c -o calculadora -lm
 2. Execute 
     ./calculadora
 3. Após escolher as opções desejadas, digite a operação no formato:
