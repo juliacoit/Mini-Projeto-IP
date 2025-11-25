@@ -1,10 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<math.h>
 
 void soma (int a, int b);
 void subtracao (int a, int b);
 void multiplicacao (int a, int b);
 void divisao (int a, int b);
+void resto (int a, int b);
+void valor_absoluto(int A);
+void diferente(int A, int B);
+void igual(int A, int B);
+void maior_que(int A, int B);
 
 int main(){
     int operacao, saida;
@@ -109,26 +115,31 @@ int main(){
 
         switch (saida) {
             case 1:
+            //soma
                 scanf("%d %*c %d", &a,&b);
                 soma(a, b);
                 break;
 
             case 2:
+            //subtracao
                 scanf("%d %*c %d", &a,&b);
                 subtracao(a, b);
                 break;
 
             case 3:
+            //multiplicacao
                 scanf("%d %*c %d", &a,&b);
                 multiplicacao(a, b);
                 break;
 
             case 4:
+            //divisao
                 scanf("%d %*c %d", &a,&b);
                 divisao(a, b);
                 break;
             
             case 5:
+            //resto
                 scanf("%d %*c %d", &a,&b);
                 resto(a, b);
                 break;
@@ -202,6 +213,7 @@ void divisao (int a, int b){
     } else {
         printf("Divisao invalida! Nao e possivel dividir por zero. Tente outra operacao\n");
     }
+}
 void resto (int a, int b)
 {
     printf("%d %% %d = %d\n", a, b, a%b);
@@ -224,9 +236,4 @@ void diferente(int A, int B){
 void maior_que(int A, int B){
     if(A>B) printf("SIM\n");
     else printf("NAO\n");
-}
-
-int main ()
-
-
 }
