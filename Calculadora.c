@@ -17,6 +17,8 @@ void maior_que(int A, int B);
 void menor_que(int A, int B);
 void maior_igual(int A, int B);
 void menor_igual(int A, int B);
+void logico_and(int A, int B);
+void logico_nand(int A, int B);
 
 int main(){
     int operacao, saida;
@@ -207,6 +209,19 @@ int main(){
                 menor_igual(a, b);
                 break;
 
+            case 25:
+            // AND
+                scanf("%d && %d", &a, &b);
+                logico_and(a, b);
+                break;
+                
+            case 26:
+            // NAND
+                scanf("%d !& %d", &a, &b);
+                logico_nand(a, b);
+                break;
+                
+
             default:
                 printf("Opção invalida! Tente novamente.\n");
         }
@@ -298,4 +313,14 @@ void maior_igual(int A, int B) {
 void menor_igual(int A, int B) {
     if(A <= B) printf("SIM\n");
     else printf("NAO\n");
+}
+
+void logico_and(int A, int B) {
+    if (A * B == 1) printf("SIM\n");
+    else printf("NÃO\n");
+}
+
+void logico_nand(int A, int B) {
+    if (A * B == 0) printf("SIM\n");
+    else printf("NÃO\n");
 }
