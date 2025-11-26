@@ -223,7 +223,7 @@ int main(){
                 
 
             default:
-                printf("Opção invalida! Tente novamente.\n");
+                printf("Opcao invalida! Tente novamente.\n");
         }
 
 
