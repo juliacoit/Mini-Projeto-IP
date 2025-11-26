@@ -1,6 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 void soma (int a, int b);
 void subtracao (int a, int b);
@@ -14,6 +14,7 @@ void valor_absoluto(int A);
 void diferente(int A, int B);
 void igual(int A, int B);
 void maior_que(int A, int B);
+void menor_que(int A, int B);
 
 int main(){
     int operacao, saida;
@@ -186,6 +187,12 @@ int main(){
                 maior_que(a, b);
                 break;
             
+            case 22:
+            // menor que
+                scanf("%d < %d", &a, &b);
+                menor_que(a, b);
+                break;
+
             default:
                 printf("Opção invalida! Tente novamente.\n");
         }
@@ -261,5 +268,10 @@ void diferente(int A, int B){
 }
 void maior_que(int A, int B){
     if(A>B) printf("SIM\n");
+    else printf("NAO\n");
+}
+
+void menor_que(int A, int B){
+    if(A < B) printf("SIM\n");
     else printf("NAO\n");
 }
