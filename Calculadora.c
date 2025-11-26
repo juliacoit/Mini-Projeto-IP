@@ -169,25 +169,25 @@ int main(){
 
             case 18: 
             //valor absoluto
-                scanf("%d", &a);
+                scanf("%d abs", &a);
                 valor_absoluto(a);
                 break;
 
             case 19:
             //igualdade
-                scanf("%d%d", &a, &b);
+                scanf("%d == %d", &a, &b);
                 igual(a, b);
                 break;
 
             case 20:
             //diferença
-                scanf("%d%d", &a, &b);
+                scanf("%d != %d", &a, &b);
                 diferente(a,b);
                 break;
 
             case 21: 
             //maior que
-                scanf("%d%d", &a, &b);
+                scanf("%d > d", &a, &b);
                 maior_que(a, b);
                 break;
 
