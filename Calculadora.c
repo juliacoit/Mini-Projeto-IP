@@ -16,6 +16,7 @@ void igual(int A, int B);
 void maior_que(int A, int B);
 void menor_que(int A, int B);
 void maior_igual(int A, int B);
+void menor_igual(int A, int B);
 
 int main(){
     int operacao, saida;
@@ -200,6 +201,12 @@ int main(){
                 maior_igual(a, b);
                 break;
             
+            case 24:
+            // menor ou igual
+                scanf("%d <= %d", &a, &b);
+                menor_igual(a, b);
+                break;
+
             default:
                 printf("Opção invalida! Tente novamente.\n");
         }
@@ -285,5 +292,10 @@ void menor_que(int A, int B){
 
 void maior_igual(int A, int B) {
     if(A >= B) printf("SIM\n");
+    else printf("NAO\n");
+}
+
+void menor_igual(int A, int B) {
+    if(A <= B) printf("SIM\n");
     else printf("NAO\n");
 }
