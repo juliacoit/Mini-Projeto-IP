@@ -167,7 +167,7 @@ int main(){
             case 18: 
             //valor absoluto
                 scanf("%d", &a);
-                valor_absoluto(int a);
+                valor_absoluto(a);
                 break;
 
             case 19:
