@@ -22,6 +22,7 @@ Todas as funções **devem ser do tipo `void`**, e o **resultado deve ser impres
     ./calculadora
 3. Após escolher as opções desejadas, digite a operação no formato:
     a "operação, ex: +" b
+---
 
 🧠 Operações Implementadas (28 funções)
 
@@ -88,6 +89,7 @@ abs
 ||
 
 !|
+---
 
 ## 👥 Integrantes do Grupo
 - Aryan Douglas Rodrigues —  [@AryanDouglas01](https://github.com/AryanDouglas01)
@@ -97,7 +99,7 @@ abs
 - Paulo Vitor Vieira  —  [@Paulim16](https://github.com/Paulim16)
 - Pedro Lukas Santos  —  [@pedro-lukas-git](https://github.com/pedro-lukas-git)
 - Sarah Godinho  —  [@Sarocaa](https://github.com/Sarocaa)
-
+---
 
 # Distribuição de Tarefas do Projeto
 
