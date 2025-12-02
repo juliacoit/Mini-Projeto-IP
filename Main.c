@@ -259,6 +259,7 @@ int main(void) {
                 case 7: res_ll = fatorial(a); tipoResultado = 1; break;
                 case 8: res_double = media(a, b); tipoResultado = 2; break;
                 // ... adicione os outros casos aqui ...
+                case 14: res_int = somatorio(a, b) tipoResultado = 1; break;
                 case 18: res_int = valor_absoluto(a); break;
                 default: res_int = 0; break;
             }
