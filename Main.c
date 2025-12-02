@@ -3,7 +3,7 @@
 #include <string.h>
 #include "raylib.h"
 
-// Seus includes originais (mantenha eles na pasta)
+// includes originais (mantenha eles na pasta)
 #include "Aryan.h"
 #include "Clara.h"
 #include "Eduarda.h"
