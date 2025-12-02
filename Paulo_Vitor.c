@@ -7,3 +7,9 @@ long long int somatorio(int a, int b){
     return soma;
 }
 
+long long int produtorio(int a, int b){
+    int i;
+    long long int produto = 1;
+    for(i = a;i <= b;i++) produto *= i;
+    return produto;
+}
