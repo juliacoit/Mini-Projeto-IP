@@ -261,7 +261,8 @@ int main(void) {
                 // ... adicione os outros casos aqui ...
                 case 14: res_int = somatorio(a, b) tipoResultado = 1; break;
                 case 15: res_int = produtorio(a, b) tipoResultado = 1; break;
-                case 16: res_int = maximo(a, b) break;
+                case 16: res_int = minimo(a, b) break;
+                case 17: res_int = maximo(a, b) break;
                 case 18: res_int = valor_absoluto(a); break;
                 default: res_int = 0; break;
             }

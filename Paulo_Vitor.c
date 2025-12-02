@@ -18,3 +18,10 @@ int minimo(int a, int b){
     if(a <= b) return a;
     else if(b <= a) return b;   
 }
+
+int maximo(int a, int b){
+    int max;
+    if(a >= b) max=a;
+    else if(b >= a) max=b;
+    return max;
+}
