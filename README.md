@@ -16,10 +16,6 @@ O programa inclui:
     exigidas\
 -   🔁 Execução contínua até que o usuário digite `0 0`
 
-Todas as funções seguem o padrão solicitado pela disciplina:\
-✔️ são do tipo `void`\
-✔️ o resultado é imprimido **somente na `main`**
-
 ------------------------------------------------------------------------
 
 # 🔗 Repositório
