@@ -8,13 +8,11 @@ disciplina *Introdução à Programação -- UFG (2025/2)*.
 
 O programa inclui:
 
--   🎨 **Interface gráfica completa** usando Raylib\
--   🌫️ **Tela inicial animada** com efeitos de fade\
--   🖱️ **Botões interativos** para iniciar a calculadora\
--   🎧 **Suporte a música e áudio** (opcional)\
+-   🎨 **Interface gráfica completa** usando Raylib
+-   🖱️ **Botões interativos** para iniciar a calculadora
+-   🎧 **Suporte a música e áudio**
 -   🧮 Implementação de **todas as 28 operações matemáticas e lógicas**
-    exigidas\
--   🔁 Execução contínua até que o usuário digite `0 0`
+    exigidas
 
 ------------------------------------------------------------------------
 
