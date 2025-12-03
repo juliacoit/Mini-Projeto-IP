@@ -2,7 +2,8 @@
 #define JULIA_H
 
 
-int  (int a, int b);
-int (int a, int b);
+int logico_or (int a, int b);
+int logico_nor (int a, int b);
 
 #endif
+
