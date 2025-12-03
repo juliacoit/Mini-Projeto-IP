@@ -146,7 +146,7 @@ int main(void) {
             
             int w = MeasureText("INICIAR", 32);
             DrawText("INICIAR", btnStart.x + (btnStart.width - w)/2,
-                     btnStart.y + 18, 32, DARKBLUE);
+                     btnStart.y + 18, 32, WHITE);
             
             Vector2 mouse = GetMousePosition();
             if (CheckCollisionPointRec(mouse, btnStart)) {
