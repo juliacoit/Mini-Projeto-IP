@@ -3,7 +3,7 @@
 #include <string.h>
 #include "raylib.h"
 
-// includes originais (mantenha eles na pasta)
+// includes originais
 #include "Aryan.h"
 #include "Clara.h"
 #include "Eduarda.h"
@@ -18,7 +18,7 @@
 #define COR_BOTAO_CLICK BLUE
 #define COR_TEXTO DARKGRAY
 
-// structs
+// telas
 typedef enum {
     TELA_MENU_CATEGORIAS = 0,
     TELA_MENU_OPERACOES,
@@ -27,254 +27,308 @@ typedef enum {
     TELA_RESULTADO
 } Tela;
 
-// variaveis
-char inputBuffer[20] = { 0 };
+// variáveis globais de input
+char inputBuffer[20] = {0};
 int contaInput = 0;
 
-// --- FUNÇÃO AUXILIAR PARA CRIAR BOTÕES ---
-// Retorna 1 (true) se o botão for clicado, 0 (false) caso contrário
+// =====================================================================
+// FUNÇÃO GENÉRICA DE BOTÃO
+// =====================================================================
 int DesenharBotao(Rectangle rect, const char* texto) {
     Vector2 mousePoint = GetMousePosition();
     int clicado = 0;
     Color corAtual = COR_BOTAO_PADRAO;
 
-    // Verifica se o mouse está dentro do retângulo
     if (CheckCollisionPointRec(mousePoint, rect)) {
         corAtual = COR_BOTAO_HOVER;
-        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
-            corAtual = COR_BOTAO_CLICK;
-        }
-        if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
-            clicado = 1;
-        }
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) corAtual = COR_BOTAO_CLICK;
+        if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) clicado = 1;
     }
 
-    // Desenha o botão
     DrawRectangleRec(rect, corAtual);
-    DrawRectangleLinesEx(rect, 2, DARKGRAY); // Borda
-    
-    // Centraliza o texto
+    DrawRectangleLinesEx(rect, 2, DARKGRAY);
+
     int textWidth = MeasureText(texto, 20);
-    DrawText(texto, rect.x + (rect.width - textWidth) / 2, rect.y + (rect.height - 20) / 2, 20, COR_TEXTO);
+    DrawText(texto, rect.x + (rect.width - textWidth) / 2,
+             rect.y + (rect.height - 20) / 2, 20, COR_TEXTO);
 
     return clicado;
 }
 
-// --- FUNÇÃO PARA O TECLADO NUMÉRICO VIRTUAL ---
-// Retorna 1 se o usuário apertou "OK" (Enter)
+// =====================================================================
+// NUMPAD
+// =====================================================================
 int DesenharNumpad(float startX, float startY) {
-    // Layout do Numpad
-    const char* teclas[12] = { "7", "8", "9", "4", "5", "6", "1", "2", "3", "-", "0", "DEL" };
-    
-    int okPressionado = 0;
-    float btnSize = 60;
-    float gap = 10;
+    const char* teclas[12] = {
+        "7","8","9",
+        "4","5","6",
+        "1","2","3",
+        "-","0","DEL"
+    };
+
+    float size = 60, gap = 10;
 
     for (int i = 0; i < 12; i++) {
-        float x = startX + (i % 3) * (btnSize + gap);
-        float y = startY + (i / 3) * (btnSize + gap);
-        Rectangle btnRect = { x, y, btnSize, btnSize };
+        float x = startX + (i % 3) * (size + gap);
+        float y = startY + (i / 3) * (size + gap);
+        Rectangle r = {x, y, size, size};
 
-        if (DesenharBotao(btnRect, teclas[i])) {
+        if (DesenharBotao(r, teclas[i])) {
             if (strcmp(teclas[i], "DEL") == 0) {
-                // Apagar último caractere
                 if (contaInput > 0) {
                     contaInput--;
                     inputBuffer[contaInput] = '\0';
                 }
             } else {
-                // Adicionar número ou sinal
                 if (contaInput < 10) {
                     inputBuffer[contaInput] = teclas[i][0];
-                    inputBuffer[contaInput+1] = '\0';
+                    inputBuffer[contaInput + 1] = '\0';
                     contaInput++;
                 }
             }
         }
     }
 
-    // Botão OK Grande abaixo do numpad
-    Rectangle okRect = { startX, startY + 4 * (btnSize + gap), (btnSize * 3) + (gap * 2), 50 };
-    if (DesenharBotao(okRect, "CONFIRMAR")) {
-        okPressionado = 1;
-    }
-    
-    return okPressionado;
+    Rectangle okBtn = { startX, startY + 4*(size+gap),
+                        size*3 + gap*2, 50 };
+
+    return DesenharBotao(okBtn, "CONFIRMAR");
 }
 
+// =====================================================================
+// MAIN
+// =====================================================================
 int main(void) {
-    const int screenWidth = 800;
-    const int screenHeight = 600;
-    InitWindow(screenWidth, screenHeight, "Calculadora Visual Raylib");
+    const int W = 800, H = 600;
+    InitWindow(W, H, "Calculadora Visual Raylib");
     SetTargetFPS(60);
 
     Tela telaAtual = TELA_MENU_CATEGORIAS;
-    int categoria = 0;
-    int operacao = 0;
+    int categoria = 0, operacao = 0;
     int a = 0, b = 0;
-    
-    // Resultados
-    int res_int = 0;
-    long long res_ll = 0;
-    double res_double = 0.0;
-    int tipoResultado = 0; 
+
     char textoFinal[100] = "";
+    int tipoResultado = 0;
+    long long resLL = 0;
+    double resD = 0.0;
+    int resI = 0;
 
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        // ================== TELA 1: CATEGORIAS ==================
+        // ========================= MENU 1 =========================
         if (telaAtual == TELA_MENU_CATEGORIAS) {
             DrawText("ESCOLHA A CATEGORIA:", 50, 40, 30, DARKBLUE);
-            
-            const char* categorias[] = {
-                "1. Basicas", "2. Avancadas", "3. Bit a Bit", 
-                "4. Intervalos", "5. Comp. Simples", "6. Comp. Logicas", "7. Booleanas"
+
+            const char* nomes[] = {
+                "1. Basicas",
+                "2. Avancadas",
+                "3. Bitwise",
+                "4. Intervalos",
+                "5. Comparacoes Simples",
+                "6. Comparacoes Logicas",
+                "7. Booleanas"
             };
 
-            for(int i = 0; i < 7; i++) {
-                Rectangle btn = { 50, 100 + (i * 60), 300, 50 };
-                if (DesenharBotao(btn, categorias[i])) {
-                    categoria = i + 1;
+            for (int i = 0; i < 7; i++) {
+                Rectangle r = {50, 100 + i*60, 300, 50};
+                if (DesenharBotao(r, nomes[i])) {
+                    categoria = i+1;
                     telaAtual = TELA_MENU_OPERACOES;
                 }
             }
         }
 
-        // ================== TELA 2: OPERAÇÕES ==================
+        // ========================= MENU 2 =========================
         else if (telaAtual == TELA_MENU_OPERACOES) {
             DrawText("ESCOLHA A OPERACAO:", 50, 40, 30, DARKBLUE);
-            
-            // Botão Voltar
+
             if (DesenharBotao((Rectangle){650, 500, 100, 40}, "Voltar")) {
                 telaAtual = TELA_MENU_CATEGORIAS;
-                categoria = 0;
             }
 
-            // Define quais botões mostrar baseado na categoria
-            // Aqui simplifiquei para mostrar listas dinâmicas
-            int inicio = 0, fim = 0;
-            char* nomesOps[10]; 
-            // Precisaria mapear nomes para IDs reais. Vou usar IDs genéricos para o exemplo funcionar.
-            
-            // Exemplo simplificado de mapeamento (ajuste conforme seus headers)
-            if(categoria == 1) { // Básicas
-                if(DesenharBotao((Rectangle){50, 100, 200, 50}, "Soma (+)")) { operacao = 1; goto PROXIMO; }
-                if(DesenharBotao((Rectangle){50, 160, 200, 50}, "Subtracao (-)")) { operacao = 2; goto PROXIMO; }
-                if(DesenharBotao((Rectangle){50, 220, 200, 50}, "Multiplicacao (*)")) { operacao = 3; goto PROXIMO; }
-                if(DesenharBotao((Rectangle){50, 280, 200, 50}, "Divisao (/)")) { operacao = 4; goto PROXIMO; }
-            }
-            else if (categoria == 2) { // Avançadas
-                 if(DesenharBotao((Rectangle){50, 100, 200, 50}, "Resto (%)")) { operacao = 5; goto PROXIMO; }
-                 if(DesenharBotao((Rectangle){50, 160, 200, 50}, "Potencia (~)")) { operacao = 6; goto PROXIMO; }
-                 if(DesenharBotao((Rectangle){50, 220, 200, 50}, "Fatorial (!)")) { operacao = 7; goto PROXIMO; }
-                 if(DesenharBotao((Rectangle){50, 280, 200, 50}, "Media (M)")) { operacao = 8; goto PROXIMO; }
-            }
-            // ... Adicione os outros else if para categorias 3, 4, 5, 6, 7 aqui ...
-            else {
-                DrawText("Adicione os botoes das outras", 50, 100, 20, GRAY);
-                DrawText("categorias no codigo...", 50, 130, 20, GRAY);
-                // Exemplo genérico para não travar
-                if(DesenharBotao((Rectangle){50, 200, 200, 50}, "Teste Absoluto")) { operacao = 18; goto PROXIMO; }
+            // ------------------------- CATEGORIA 1 -------------------------
+            if (categoria == 1) {
+                if (DesenharBotao((Rectangle){50, 100, 200, 50}, "Soma"))
+                    operacao = 1;
+                else if (DesenharBotao((Rectangle){50, 160, 200, 50}, "Subtracao"))
+                    operacao = 2;
+                else if (DesenharBotao((Rectangle){50, 220, 200, 50}, "Multiplicacao"))
+                    operacao = 3;
+                else if (DesenharBotao((Rectangle){50, 280, 200, 50}, "Divisao"))
+                    operacao = 4;
+                else goto SKIP;
             }
 
-            goto RENDER_END; // Pula o bloco PROXIMO se nada foi clicado
+            // ------------------------- CATEGORIA 2 -------------------------
+            else if (categoria == 2) {
+                if (DesenharBotao((Rectangle){50,100,200,50},"Resto"))
+                    operacao = 5;
+                else if (DesenharBotao((Rectangle){50,160,200,50},"Potencia"))
+                    operacao = 6;
+                else if (DesenharBotao((Rectangle){50,220,200,50},"Fatorial"))
+                    operacao = 7;
+                else if (DesenharBotao((Rectangle){50,280,200,50},"Media"))
+                    operacao = 8;
+                else goto SKIP;
+            }
 
-            PROXIMO:
-                memset(inputBuffer, 0, sizeof(inputBuffer));
-                contaInput = 0;
-                telaAtual = TELA_INPUT_A;
+            // ------------------------- CATEGORIA 3 -------------------------
+            else if (categoria == 3) {
+                // ainda não definida – deixe em aberto
+                DrawText("Em desenvolvimento...", 50, 120, 20, DARKGRAY);
+                goto SKIP;
+            }
+
+            // ------------------------- CATEGORIA 4 -------------------------
+            else if (categoria == 4) {
+                if (DesenharBotao((Rectangle){50,100,200,50},"Somatorio"))
+                    operacao = 14;
+                else if (DesenharBotao((Rectangle){50,160,200,50},"Produtorio"))
+                    operacao = 15;
+                else goto SKIP;
+            }
+
+            // ------------------------- CATEGORIA 5 -------------------------
+            else if (categoria == 5) {
+                if (DesenharBotao((Rectangle){50,100,200,50},"Minimo"))
+                    operacao = 16;
+                else if (DesenharBotao((Rectangle){50,160,200,50},"Maximo"))
+                    operacao = 17;
+                else if (DesenharBotao((Rectangle){50,220,200,50},"Abs"))
+                    operacao = 18;
+                else goto SKIP;
+            }
+
+            // ------------------------- CATEGORIA 6 -------------------------
+            else if (categoria == 6) {
+                if (DesenharBotao((Rectangle){50,100,200,50},"Igual"))
+                    operacao = 30;
+                else if (DesenharBotao((Rectangle){50,160,200,50},"Diferente"))
+                    operacao = 31;
+                else if (DesenharBotao((Rectangle){50,220,200,50},"Maior"))
+                    operacao = 32;
+                else if (DesenharBotao((Rectangle){50,280,200,50},"Menor"))
+                    operacao = 33;
+                else goto SKIP;
+            }
+
+            // ------------------------- CATEGORIA 7 -------------------------
+            else if (categoria == 7) {
+                if (DesenharBotao((Rectangle){50,100,200,50},"AND"))
+                    operacao = 40;
+                else if (DesenharBotao((Rectangle){50,160,200,50},"OR"))
+                    operacao = 41;
+                else if (DesenharBotao((Rectangle){50,220,200,50},"NAND"))
+                    operacao = 42;
+                else if (DesenharBotao((Rectangle){50,280,200,50},"NOR"))
+                    operacao = 43;
+                else goto SKIP;
+            }
+
+            memset(inputBuffer,0,sizeof(inputBuffer));
+            contaInput = 0;
+            telaAtual = TELA_INPUT_A;
+
+            SKIP: ;
         }
 
-        // ================== TELA 3: INPUT A ==================
+        // ================================================================
+        // Entrada de A
+        // ================================================================
         else if (telaAtual == TELA_INPUT_A) {
-            DrawText("DIGITE O VALOR DE A:", 400, 50, 20, BLACK);
-            
-            // Caixa de texto visual
+            DrawText("Digite o valor de A:", 400, 50, 20, BLACK);
+
             DrawRectangle(400, 80, 200, 50, LIGHTGRAY);
             DrawText(inputBuffer, 410, 90, 40, MAROON);
 
-            // Desenha Numpad na esquerda
             if (DesenharNumpad(100, 100)) {
-                // Clicou em CONFIRMAR
-                if (contaInput > 0 || inputBuffer[0] == '\0') {
-                    a = atoi(inputBuffer);
-                    memset(inputBuffer, 0, sizeof(inputBuffer));
-                    contaInput = 0;
-                    
-                    if (operacao == 7 || operacao == 18) { // Unários (Fatorial, Abs)
-                        goto CALCULAR_AGORA;
-                    } else {
-                        telaAtual = TELA_INPUT_B;
-                    }
-                }
+                a = atoi(inputBuffer);
+                memset(inputBuffer,0,sizeof(inputBuffer));
+                contaInput = 0;
+
+                // Operações unárias
+                if (operacao == 7 || operacao == 18) goto CALCULO;
+
+                telaAtual = TELA_INPUT_B;
             }
         }
 
-        // ================== TELA 4: INPUT B ==================
+        // ================================================================
+        // Entrada de B
+        // ================================================================
         else if (telaAtual == TELA_INPUT_B) {
-            DrawText(TextFormat("Valor A definido: %d", a), 400, 50, 20, DARKGREEN);
-            DrawText("DIGITE O VALOR DE B:", 400, 100, 20, BLACK);
-            
+            DrawText(TextFormat("Valor A: %d", a), 400, 50, 20, DARKGREEN);
+            DrawText("Digite o valor de B:", 400, 100, 20, BLACK);
+
             DrawRectangle(400, 130, 200, 50, LIGHTGRAY);
             DrawText(inputBuffer, 410, 140, 40, MAROON);
 
             if (DesenharNumpad(100, 100)) {
-                if (contaInput > 0 || inputBuffer[0] == '\0') {
-                    b = atoi(inputBuffer);
-                    goto CALCULAR_AGORA;
-                }
+                b = atoi(inputBuffer);
+                goto CALCULO;
             }
         }
 
-        // ================== LÓGICA DE CÁLCULO E TELA FINAL ==================
+        // ================================================================
+        // TELA RESULTADO
+        // ================================================================
         else if (telaAtual == TELA_RESULTADO) {
             DrawText("RESULTADO:", 50, 50, 40, DARKBLUE);
             DrawText(textoFinal, 50, 120, 40, BLACK);
-            
-            DrawText(TextFormat("Operacao ID: %d | A: %d | B: %d", operacao, a, b), 50, 200, 20, GRAY);
 
-            if (DesenharBotao((Rectangle){50, 300, 200, 60}, "Novo Calculo")) {
+            if (DesenharBotao((Rectangle){50,300,200,60}, "Novo Calculo"))
                 telaAtual = TELA_MENU_CATEGORIAS;
-                categoria = 0;
-                operacao = 0;
-            }
-            if (DesenharBotao((Rectangle){300, 300, 200, 60}, "Sair")) {
+
+            if (DesenharBotao((Rectangle){300,300,200,60}, "Sair"))
                 break;
-            }
         }
 
-        // Bloco de salto para cálculo (gambiarra organizada para centralizar o switch)
+        // ================================================================
+        // BLOCO DE CÁLCULO
+        // ================================================================
         if (0) {
-            CALCULAR_AGORA:
-            tipoResultado = 0; 
+            CALCULO:
+
+            tipoResultado = 0;
+
             switch (operacao) {
-                case 1: res_int = soma(a, b); break;
-                case 2: res_int = subtracao(a, b); break;
-                case 3: res_int = multiplicacao(a, b); break;
-                case 4: res_double = divisao(a, b); tipoResultado = 2; break;
-                case 5: res_int = resto(a, b); break;
-                case 6: res_ll = potencia(a, b); tipoResultado = 1; break;
-                case 7: res_ll = fatorial(a); tipoResultado = 1; break;
-                case 8: res_double = media(a, b); tipoResultado = 2; break;
-                // ... adicione os outros casos aqui ...
-                case 14: res_int = somatorio(a, b) tipoResultado = 1; break;
-                case 15: res_int = produtorio(a, b) tipoResultado = 1; break;
-                case 16: res_int = minimo(a, b) break;
-                case 17: res_int = maximo(a, b) break;
-                case 18: res_int = valor_absoluto(a); break;
-                default: res_int = 0; break;
+                case 1: resI = soma(a,b); break;
+                case 2: resI = subtracao(a,b); break;
+                case 3: resI = multiplicacao(a,b); break;
+                case 4: resD = divisao(a,b); tipoResultado = 2; break;
+                case 5: resI = resto(a,b); break;
+                case 6: resLL = potencia(a,b); tipoResultado = 1; break;
+                case 7: resLL = fatorial(a); tipoResultado = 1; break;
+                case 8: resD = media(a,b); tipoResultado = 2; break;
+
+                case 14: resLL = somatorio(a,b); tipoResultado = 1; break;
+                case 15: resLL = produtorio(a,b); tipoResultado = 1; break;
+                case 16: resI = minimo(a,b); break;
+                case 17: resI = maximo(a,b); break;
+                case 18: resI = valor_absoluto(a); break;
+
+                case 30: resI = igual(a,b); break;
+                case 31: resI = diferente(a,b); break;
+                case 32: resI = maior_que(a,b); break;
+                case 33: resI = menor_que(a,b); break;
+
+                case 40: resI = logico_and(a,b); break;
+                case 41: resI = logico_or(a,b); break;
+                case 42: resI = logico_nand(a,b); break;
+                case 43: resI = logico_nor(a,b); break;
+
+                default: resI = 0; break;
             }
 
-            if (tipoResultado == 0) sprintf(textoFinal, "%d", res_int);
-            else if (tipoResultado == 1) sprintf(textoFinal, "%lld", res_ll);
-            else sprintf(textoFinal, "%.2f", res_double);
-            
+            if (tipoResultado == 0) sprintf(textoFinal, "%d", resI);
+            else if (tipoResultado == 1) sprintf(textoFinal, "%lld", resLL);
+            else sprintf(textoFinal, "%.2f", resD);
+
             telaAtual = TELA_RESULTADO;
         }
 
-        RENDER_END:
         EndDrawing();
     }
 
