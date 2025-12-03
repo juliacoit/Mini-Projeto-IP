@@ -20,12 +20,14 @@
 
 // telas
 typedef enum {
+    TELA_INTRO = -1,
     TELA_MENU_CATEGORIAS = 0,
     TELA_MENU_OPERACOES,
     TELA_INPUT_A,
     TELA_INPUT_B,
     TELA_RESULTADO
 } Tela;
+
 
 // variáveis globais de input
 char inputBuffer[20] = {0};
@@ -99,11 +101,14 @@ int DesenharNumpad(float startX, float startY) {
 // MAIN
 // =====================================================================
 int main(void) {
-    const int W = 800, H = 600;
-    InitWindow(W, H, "Calculadora Visual Raylib");
+    const int W = 800, H = 800;
+    InitWindow(W, H, "Mini-Projeto-Calculadora");
+    InitAudioDevice();
+    Music music = LoadMusicStream("Escape From the City 8 Bit Remix - Sonic Adventure 2.mp3");
+    PlayMusicStream(music);
     SetTargetFPS(60);
 
-    Tela telaAtual = TELA_MENU_CATEGORIAS;
+    Tela telaAtual = TELA_INTRO;
     int categoria = 0, operacao = 0;
     int a = 0, b = 0;
 
@@ -114,8 +119,47 @@ int main(void) {
     int resI = 0;
 
     while (!WindowShouldClose()) {
+        UpdateMusicStream(music);
         BeginDrawing();
         ClearBackground(RAYWHITE);
+
+        // ================================================================
+        // TELA INTRO – TELA DE BOAS-VINDAS
+        // ================================================================
+        if (telaAtual == TELA_INTRO) {
+        
+            static float alpha = 0.0f;
+            if (alpha < 1.0f) alpha += 0.01f;   // animação
+        
+            DrawRectangle(0, 0, W, H, Fade(DARKBLUE, 0.3f));
+        
+            DrawText("Bem-vindo ao Mini-Projeto de IP!", 60, 140, 28, Fade(BLACK, alpha));
+            DrawText("Calculadora em C",                   100, 230, 24, Fade(DARKGRAY, alpha));
+            DrawText("Ciência da Computação – UFG",       100, 270, 24, Fade(DARKGRAY, alpha));
+            DrawText("2025/2",                            100, 310, 24, Fade(DARKGRAY, alpha));
+            DrawText("Prof: Gustavo",                     100, 350, 24, Fade(DARKGRAY, alpha));
+
+            
+            Rectangle btnStart = { 280, 400, 240, 70 };
+            DrawRectangleRounded(btnStart, 0.3f, 10, RED);
+            DrawRectangleRoundedLines(btnStart, 0.3f, 10, BLACK);
+            
+            int w = MeasureText("INICIAR", 32);
+            DrawText("INICIAR", btnStart.x + (btnStart.width - w)/2,
+                     btnStart.y + 18, 32, DARKBLUE);
+            
+            Vector2 mouse = GetMousePosition();
+            if (CheckCollisionPointRec(mouse, btnStart)) {
+                DrawRectangleRounded(btnStart, 0.3f, 10, Fade(BLUE, 0.4f));
+                if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+                    telaAtual = TELA_MENU_CATEGORIAS;
+                }
+            }
+        
+            EndDrawing();
+            continue;
+        }
+
 
         // ========================= MENU 1 =========================
         if (telaAtual == TELA_MENU_CATEGORIAS) {
@@ -176,7 +220,7 @@ int main(void) {
 
             // ------------------------- CATEGORIA 3 -------------------------
             else if (categoria == 3) {
-                // ainda não definida – deixe em aberto
+                // parte do aryan
                 DrawText("Em desenvolvimento...", 50, 120, 20, DARKGRAY);
                 goto SKIP;
             }
@@ -331,7 +375,8 @@ int main(void) {
 
         EndDrawing();
     }
-
+    UnloadMusicStream(music);
+    CloseAudioDevice();
     CloseWindow();
     return 0;
 }
