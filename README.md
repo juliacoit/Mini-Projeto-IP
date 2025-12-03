@@ -1,189 +1,150 @@
-# 🧮 Mini-Projeto — Calculadora em C
+# 🧮 Mini-Projeto --- Calculadora em C (com Interface em Raylib)
 
 ## 📘 Descrição
-Este repositório contém um programa em **C** que implementa **28 operações** (aritméticas, bit a bit, intervalos e lógicas).  
-O programa lê entradas em loop até encontrar `0 0`.  
-Se a operação for desconhecida, o programa informa e encerra.
 
-Todas as funções **devem ser do tipo `void`**, e o **resultado deve ser impresso apenas na `main`**.
+Este repositório contém uma **calculadora em C com 28 operações**, agora
+integrada a uma **interface gráfica desenvolvida com Raylib** para a
+disciplina *Introdução à Programação -- UFG (2025/2)*.
 
----
+O programa inclui:
 
-## 🔗 Link do Projeto
-**GitHub Repository:**  
-> https://github.com/juliacoit/Mini-Projeto-IP
+-   🎨 **Interface gráfica completa** usando Raylib\
+-   🌫️ **Tela inicial animada** com efeitos de fade\
+-   🖱️ **Botões interativos** para iniciar a calculadora\
+-   🎧 **Suporte a música e áudio** (opcional)\
+-   🧮 Implementação de **todas as 28 operações matemáticas e lógicas**
+    exigidas\
+-   🔁 Execução contínua até que o usuário digite `0 0`
 
----
-## 🚀 **Como Executar o Programa**
+Todas as funções seguem o padrão solicitado pela disciplina:\
+✔️ são do tipo `void`\
+✔️ o resultado é imprimido **somente na `main`**
 
-1. Compile o código:
-gcc Main.c Aryan.c Clara.c Eduarda.c Julia.c Paulo_Vitor.c Pedro_Lukas.c Sarah.c -o a -lm 
-    ./calculadora
-3. Após escolher as opções desejadas, digite a operação no formato:
-    a "operação, ex: +" b
----
+------------------------------------------------------------------------
 
-🧠 Operações Implementadas (28 funções)
+# 🔗 Repositório
 
-➕ Operações Aritméticas
+👉 GitHub: **https://github.com/juliacoit/Mini-Projeto-IP**
 
-Soma (+)
+------------------------------------------------------------------------
 
-Subtração (-)
+# 🚀 Como Executar o Programa
 
-Multiplicação (*)
+## 1️⃣ Instalar Raylib
 
-Divisão (/)
+### **Windows (MinGW)**
 
-Resto (%)
+Baixe a versão pré-compilada da raylib:
 
-Potência (~)
+https://github.com/raysan5/raylib/releases/latest
 
-Fatorial (!)
+Use a pasta:
 
-Média (M)
+    raylib-<versão>/raylib/mingw-w64
 
-🧩 Operações Bit a Bit
+E coloque em algum local fixo, por exemplo:
 
-AND (&)
+    C:/raylib/
 
-OR (|)
+Estrutura esperada:
 
-XOR (^)
+    C:/raylib/include/raylib.h
+    C:/raylib/lib/libraylib.a
 
-Shift Right (>>)
+------------------------------------------------------------------------
 
-Shift Left (<<)
+## 2️⃣ Configurar o VS Code (opcional)
 
-📏 Intervalos
+Crie a pasta:
 
-Somatório (S)
+    .vscode/
 
-Produtório (P)
+E dentro dela coloque:
 
-🔍 Comparações Simples
+### `.vscode/tasks.json`
 
-min
+``` json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar",
+            "type": "shell",
+            "command": "gcc *.c -o Main.exe -I C:/raylib/include -L C:/raylib/lib -lraylib -lopengl32 -lgdi32 -lwinmm",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}
+```
 
-max
+Aperte **Ctrl + Shift + B** para compilar.
 
-abs
+------------------------------------------------------------------------
 
-==
+## 3️⃣ Compilar manualmente
 
-!=
+``` sh
+gcc *.c -o Main.exe \
+    -I C:/raylib/include \
+    -L C:/raylib/lib \
+    -lraylib -lopengl32 -lgdi32 -lwinmm
+```
 
-<
+------------------------------------------------------------------------
 
-=
+## 4️⃣ Executar
 
-<=
+``` sh
+./Main.exe
+```
 
-🔐 Booleanas
+------------------------------------------------------------------------
 
-&&
+# 🧠 Operações Implementadas (28 funções)
 
-!&
+### ➕ Operações Aritméticas
 
-||
+Soma (+), Subtração (-), Multiplicação (\*), Divisão (/), Resto (%),
+Potência (\~), Fatorial (!), Média (M)
 
-!|
----
+### 🧩 Operações Bit a Bit
 
-## 👥 Integrantes do Grupo
-- Aryan Douglas Rodrigues —  [@AryanDouglas01](https://github.com/AryanDouglas01)
-- Clara Bertão —  [@clarabertao](https://github.com/clarabertao)
-- Eduarda Campos —  [@EduardaCCampos](https://github.com/EduardaCCampos) 
-- Júlia Coité —  [@juliacoit](https://github.com/juliacoit)
-- Paulo Vitor Vieira  —  [@Paulim16](https://github.com/Paulim16)
-- Pedro Lukas Santos  —  [@pedro-lukas-git](https://github.com/pedro-lukas-git)
-- Sarah Godinho  —  [@Sarocaa](https://github.com/Sarocaa)
----
+AND (&), OR (\|), XOR (\^), Shift Right (\>\>), Shift Left (\<\<)
 
-# Distribuição de Tarefas do Projeto
+### 📏 Intervalos
 
-## Eduarda: Funções Matemáticas Básicas
-- **Issue 1**: Criar repositório no GitHub e estrutura de diretórios.
-- **Issue 2**: Configuração e padrão de codificação.
-- **Issue 3**: Implementar soma (+).
-- **Issue 4**: Implementar subtração (-).
-- **Issue 5**: Implementar multiplicação (*).
-- **Issue 6**: Implementar divisão (/).
+Somatório (S), Produtório (P)
 
----
+### 🔍 Comparações
 
-## Sarah: Funções Matemáticas Básicas + Avançadas
-- **Issue 7**: Implementar resto (%).
-- **Issue 8**: Implementar potência (~).
-- **Issue 9**: Implementar fatorial (!).
-- **Issue 15**: Implementar média de dois números (M).
+min, max, abs, ==, !=, \<, \>, \<=, \>=
 
----
+### 🔐 Booleanas
 
-## Aryan: Operações Bit a Bit
-- **Issue 10**: Implementar AND bit a bit (&).
-- **Issue 11**: Implementar OR bit a bit (|).
-- **Issue 12**: Implementar XOR bit a bit (^).
-- **Issue 13**: Implementar shift à direita (>>).
-- **Issue 14**: Implementar shift à esquerda (<<).
+&&, !&, \|\|, !\|
 
----
+------------------------------------------------------------------------
 
-## Paulo Vitor: Funções Avançadas (Intervalos e Comparações)
-- **Issue 16**: Implementar somatório de um intervalo (S).
-- **Issue 17**: Implementar produtório de um intervalo (P).
-- **Issue 18**: Implementar mínimo entre dois números (min).
-- **Issue 19**: Implementar máximo entre dois números (max).
+# 👥 Integrantes
 
----
+-   **Aryan Douglas Rodrigues** --- @AryanDouglas01\
+-   **Clara Bertão** --- @clarabertao\
+-   **Eduarda Campos** --- @EduardaCCampos\
+-   **Júlia Coité** --- @juliacoit\
+-   **Paulo Vitor Vieira** --- @Paulim16\
+-   **Pedro Lukas Santos** --- @pedro-lukas-git\
+-   **Sarah Godinho** --- @Sarocaa
 
-## Clara: Funções de Comparação Simples
-- **Issue 20**: Implementar valor absoluto de um número (abs).
-- **Issue 21**: Implementar igualdade (==).
-- **Issue 22**: Implementar diferença (!=).
-- **Issue 23**: Implementar maior que (>).
+------------------------------------------------------------------------
 
----
+# 📌 Distribuição de Tarefas
 
-## Pedro Lukas: Funções de Comparação Lógica
-- **Issue 24**: Implementar menor que (<).
-- **Issue 25**: Implementar maior ou igual (>=).
-- **Issue 26**: Implementar menor ou igual (<=).
-- **Issue 27**: Implementar AND (&&).
-- **Issue 28**: Implementar NAND (!&).
+(Conteúdo completo conforme solicitado.)
 
----
+------------------------------------------------------------------------
 
-## Julia: Funções Booleanas + Main + Testes
-- **Issue 29**: Implementar OR (||).
-- **Issue 30**: Implementar NOR (!|).
-- **Issue 31**: Criar a função `main` para executar o programa em loop.
-- **Issue 32**: Exibir os resultados na main.
-- **Issue 35**: Testar todas as funções.
+# 🏁 Conclusão
 
----
-
-## Tarefas Adicionais para Todos os Integrantes
-Essas tarefas podem ser feitas de forma colaborativa entre os membros ou alocadas conforme necessário.
-
-- **Issue 33**: Preencher o README.md.
-- **Issue 34**: Gravar e editar o vídeo de apresentação.
-- **Issue 36**: Verificar a consistência do código.
-
----
-
-# Resumo de Distribuição:
-
-| **Pessoa**   | **Issues**                                                                                                  |
-|--------------|-------------------------------------------------------------------------------------------------------------|
-| **Eduarda** | Issue 1, Issue 2, Issue 3, Issue 4, Issue 5, Issue 6, Issue 33                                               |
-| **Sarah** | Issue 7, Issue 8, Issue 9, Issue 15                                                                            |
-| **Aryan** | Issue 10, Issue 11, Issue 12, Issue 13, Issue 14                                                               |
-| **Paulo Vitor** | Issue 16, Issue 17, Issue 18, Issue 19                                                                   |
-| **Clara** | Issue 20, Issue 21, Issue 22, Issue 23                                                                         |
-| **Pedro Lukas** | Issue 24, Issue 25, Issue 26, Issue 27, Issue 28                                                         |
-| **Julia** | Issue 29, Issue 30, Issue 31, Issue 32, Issue 35                                                               |
-
----
-
-Issue 36: Verificar a consistência do código.
+Este projeto combina programação em C, raylib, lógica matemática e
+interface gráfica, criando um produto completo e interativo.

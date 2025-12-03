@@ -135,7 +135,7 @@ int main(void) {
         
             DrawText("Bem-vindo ao Mini-Projeto de IP!", 60, 140, 28, Fade(BLACK, alpha));
             DrawText("Calculadora em C",                   100, 230, 24, Fade(DARKGRAY, alpha));
-            DrawText("Ciência da Computação – UFG",       100, 270, 24, Fade(DARKGRAY, alpha));
+            DrawText("Ciência da Computação: UFG",       100, 270, 24, Fade(DARKGRAY, alpha));
             DrawText("2025/2",                            100, 310, 24, Fade(DARKGRAY, alpha));
             DrawText("Prof: Gustavo",                     100, 350, 24, Fade(DARKGRAY, alpha));
 
