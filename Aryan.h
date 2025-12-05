@@ -1,5 +1,5 @@
-#ifndef ARYAN.H
-#define ARYAN.H
+#ifndef ARYAN_H
+#define ARYAN_H
 
 int Desloca_Bits_Direita(int valor, int bits);
 int Desloca_Bits_Esquerda(int valor, int bits);

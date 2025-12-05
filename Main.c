@@ -147,7 +147,6 @@ int main(void) {
             int w = MeasureText("INICIAR", 32);
             DrawText("INICIAR", btnStart.x + (btnStart.width - w)/2,
                      btnStart.y + 18, 32, WHITE);
-            
             Vector2 mouse = GetMousePosition();
             if (CheckCollisionPointRec(mouse, btnStart)) {
                 DrawRectangleRounded(btnStart, 0.3f, 10, Fade(BLUE, 0.4f));
@@ -221,8 +220,17 @@ int main(void) {
             // ------------------------- CATEGORIA 3 -------------------------
             else if (categoria == 3) {
                 // parte do aryan
-                DrawText("Em desenvolvimento...", 50, 120, 20, DARKGRAY);
-                goto SKIP;
+                if (DesenharBotao((Rectangle){50,100,200,50},"Desloca Bits >"))
+                    operacao = 9;
+                else if (DesenharBotao((Rectangle){50,160,200,50},"Desloca Bits <"))
+                    operacao = 10;
+                else if (DesenharBotao((Rectangle){50,220,200,50},"XOR Bitwise"))
+                    operacao = 11;
+                else if (DesenharBotao((Rectangle){50,280,200,50},"OR Bitwise"))
+                    operacao = 12;
+                else if (DesenharBotao((Rectangle){50,340,200,50},"AND Bitwise"))
+                    operacao = 13;
+                 else goto SKIP;
             }
 
             // ------------------------- CATEGORIA 4 -------------------------
@@ -346,6 +354,12 @@ int main(void) {
                 case 6: resLL = potencia(a,b); tipoResultado = 1; break;
                 case 7: resLL = fatorial(a); tipoResultado = 1; break;
                 case 8: resD = media(a,b); tipoResultado = 2; break;
+
+                case 9: resI = Desloca_Bits_Direita (a, b); break;
+                case 10: resI = Desloca_Bits_Esquerda (a, b); break;
+                case 11: resI = Xor_Bitwise (a, b); break;
+                case 12: resI = Or_Bitwise (a, b); break;
+                case 13: resI = And_Bitwise (a, b); break;
 
                 case 14: resLL = somatorio(a,b); tipoResultado = 1; break;
                 case 15: resLL = produtorio(a,b); tipoResultado = 1; break;
