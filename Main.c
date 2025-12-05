@@ -98,6 +98,43 @@ int DesenharNumpad(float startX, float startY) {
 }
 
 // =====================================================================
+// BINARY PAD (APENAS 0 e 1)
+// =====================================================================
+int DesenharBinPad(float startX, float startY) {
+    const char* teclas[3] = { "1", "0", "DEL" };
+    
+    // Botões maiores para preencher o espaço
+    float width = 80;
+    float height = 60;
+    float gap = 15;
+
+    // Desenha 1 e 0 lado a lado
+    for (int i = 0; i < 2; i++) {
+        Rectangle r = { startX + i * (width + gap), startY, width, height };
+        if (DesenharBotao(r, teclas[i])) {
+            if (contaInput < 19) { // Limite do buffer
+                inputBuffer[contaInput] = teclas[i][0];
+                inputBuffer[contaInput + 1] = '\0';
+                contaInput++;
+            }
+        }
+    }
+
+    // Botão DEL embaixo
+    Rectangle delBtn = { startX, startY + height + gap, (width * 2) + gap, height };
+    if (DesenharBotao(delBtn, "DEL")) {
+        if (contaInput > 0) {
+            contaInput--;
+            inputBuffer[contaInput] = '\0';
+        }
+    }
+
+    // Botão CONFIRMAR bem embaixo
+    Rectangle okBtn = { startX, startY + (height + gap) * 2, (width * 2) + gap, 50 };
+    return DesenharBotao(okBtn, "CONFIRMAR");
+}
+
+// =====================================================================
 // MAIN
 // =====================================================================
 int main(void) {
@@ -290,19 +327,39 @@ int main(void) {
         // Entrada de A
         // ================================================================
         else if (telaAtual == TELA_INPUT_A) {
-            DrawText("Digite o valor de A:", 400, 50, 20, BLACK);
+            
+            char perguntaA[50] = "Digite o valor de A:"; 
 
-            DrawRectangle(400, 80, 200, 50, LIGHTGRAY);
-            DrawText(inputBuffer, 410, 90, 40, MAROON);
+            switch(operacao) {
+                case 4: case 5: strcpy(perguntaA, "Digite o Dividendo:"); break; // Divisão/Resto
+                case 6:         strcpy(perguntaA, "Digite a Base:"); break;      // Potência
+                case 14: case 15: strcpy(perguntaA, "Inicio do Intervalo:"); break; // Somatório/Produtório
+                
+                // Bitwise
+                case 9: case 10: case 11: case 12: case 13:
+                     strcpy(perguntaA, "Valor em Binario:"); 
+                     break;
+            }
 
-            if (DesenharNumpad(100, 100)) {
-                a = atoi(inputBuffer);
-                memset(inputBuffer,0,sizeof(inputBuffer));
+            DrawText(perguntaA, 400, 50, 20, BLACK);
+            
+             if (categoria == 3) DrawText("(Use 0 e 1)", 400, 70, 15, DARKGRAY);
+
+            DrawRectangle(400, 90, 200, 50, LIGHTGRAY);
+            DrawText(inputBuffer, 410, 100, 40, MAROON);
+
+            int confirmou = 0;
+            if (categoria == 3) confirmou = DesenharBinPad(100, 100);
+            else confirmou = DesenharNumpad(100, 100);
+
+            if (confirmou) {
+                if (categoria == 3) a = (int)strtol(inputBuffer, NULL, 2);
+                else a = atoi(inputBuffer);
+
+                memset(inputBuffer, 0, sizeof(inputBuffer));
                 contaInput = 0;
-
-                // Operações unárias
-                if (operacao == 7 || operacao == 18) goto CALCULO;
-
+                
+                if (operacao == 7 || operacao == 18) goto CALCULO; 
                 telaAtual = TELA_INPUT_B;
             }
         }
@@ -311,14 +368,56 @@ int main(void) {
         // Entrada de B
         // ================================================================
         else if (telaAtual == TELA_INPUT_B) {
-            DrawText(TextFormat("Valor A: %d", a), 400, 50, 20, DARKGREEN);
-            DrawText("Digite o valor de B:", 400, 100, 20, BLACK);
+            
+            // Mostra o valor de A escolhido anteriormente
+            DrawText(TextFormat("A: %d", a), 400, 50, 20, DARKGREEN);
+            if (categoria == 3) DrawText(TextFormat("(Hex: %X)", a), 500, 50, 20, GRAY);
 
-            DrawRectangle(400, 130, 200, 50, LIGHTGRAY);
-            DrawText(inputBuffer, 410, 140, 40, MAROON);
+            // --- 1. Define o Texto da Pergunta B ---
+            char perguntaB[50] = "Digite o valor de B:"; // Padrão
 
-            if (DesenharNumpad(100, 100)) {
-                b = atoi(inputBuffer);
+            switch(operacao) {
+                case 4:         strcpy(perguntaB, "Digite o Divisor:"); break;    // Divisão
+                case 5:         strcpy(perguntaB, "Dividir por:"); break;         // Resto
+                case 6:         strcpy(perguntaB, "Digite o Expoente:"); break;   // Potência
+                case 8:         strcpy(perguntaB, "Segunda Nota/Valor:"); break;  // Média
+                
+                // Bitwise - Deslocamento
+                case 9:         strcpy(perguntaB, "Deslocar p/ Direita:"); break;
+                case 10:        strcpy(perguntaB, "Deslocar p/ Esquerda:"); break;
+                
+                // Bitwise - Lógica
+                case 11: case 12: case 13:
+                                strcpy(perguntaB, "Mascara (Binario):"); break;
+
+                // Intervalos
+                case 14: case 15: strcpy(perguntaB, "Fim do Intervalo:"); break;
+            }
+            
+            // --- 2. Desenha o Texto ---
+            DrawText(perguntaB, 400, 100, 20, BLACK);
+
+            // --- 3. Define lógica de teclado (Binario vs Decimal) ---
+            int usarTecladoBinario = 0;
+            if (categoria == 3 && (operacao >= 11 && operacao <= 13)) {
+                usarTecladoBinario = 1;
+            }
+            
+            // Dica visual extra para deslocamento
+            if (operacao == 9 || operacao == 10) {
+                 DrawText("(Qtd de casas)", 400, 125, 15, DARKGRAY);
+            }
+
+            DrawRectangle(400, 140, 200, 50, LIGHTGRAY);
+            DrawText(inputBuffer, 410, 150, 40, MAROON);
+
+            int confirmou = 0;
+            if (usarTecladoBinario) confirmou = DesenharBinPad(100, 100);
+            else confirmou = DesenharNumpad(100, 100);
+
+            if (confirmou) {
+                 if (usarTecladoBinario) b = (int)strtol(inputBuffer, NULL, 2);
+                 else b = atoi(inputBuffer);
                 goto CALCULO;
             }
         }
