@@ -101,10 +101,10 @@ O programa implementa rigorosamente as 28 funções solicitadas nas instruções
 | :--- | :--- | :--- |
 | **Aryan Douglas** | [@AryanDouglas01](https://github.com/AryanDouglas01) | Bitwise & Shifts |
 | **Clara Bertão** | [@clarabertao](https://github.com/clarabertao) | Funções Avançadas |
-| **Eduarda Campos** | [@EduardaCCampos](https://github.com/EduardaCCampos) | Booleanas & Interface |
+| **Eduarda Campos** | [@EduardaCCampos](https://github.com/EduardaCCampos) | Operações Básicas & Interface |
 | **Júlia Coité** | [@juliacoit](https://github.com/juliacoit) | Interface Gráfica, Comparadores Lógicos |
 | **Paulo Vitor** | [@Paulim16](https://github.com/Paulim16) | Intervalos & Estatística |
-| **Pedro Lukas** | [@pedro-lukas-git](https://github.com/pedro-lukas-git) | Operações Básicas |
+| **Pedro Lukas** | [@pedro-lukas-git](https://github.com/pedro-lukas-git) | Booleanas |
 | **Sarah Godinho** | [@Sarocaa](https://github.com/Sarocaa) | Comparadores Lógicos |
 
 ---
