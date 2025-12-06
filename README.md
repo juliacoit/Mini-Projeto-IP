@@ -1,4 +1,4 @@
-# 🧮 Mini-Projeto — Calculadora Científica & Bitwise (C + Raylib)
+# 🧮 Mini-Projeto — Calculadora em C (com Interface Gráfica)
 
 ![Language](https://img.shields.io/badge/Language-C-blue)
 ![Library](https://img.shields.io/badge/Library-Raylib-red)
@@ -6,101 +6,103 @@
 
 ## 📘 Descrição
 
-Este repositório contém uma **calculadora modular em C**, integrada a uma **interface gráfica moderna desenvolvida com Raylib**. O projeto foi desenvolvido para a disciplina *Introdução à Programação — UFG (2025/2)*.
+Este repositório contém o **Mini-Projeto** desenvolvido para a disciplina de *Introdução à Programação (IP)* da **Universidade Federal de Goiás (UFG) - 2025/2**.
 
-O diferencial deste projeto é a **Experiência de Usuário (UX)** adaptativa e a organização modular do código.
+O objetivo foi desenvolver um programa em C que implementasse **28 operações** matemáticas, lógicas e de manipulação de bits. O grupo utilizou a "livre criatividade" permitida nas instruções para ir além do terminal básico, implementando uma **Interface Gráfica (GUI)** completa utilizando a biblioteca **Raylib**.
 
-### ✨ Destaques da Nova Versão
-
-* 🎨 **Interface Gráfica Completa:** Menu interativo, botões responsivos e design limpo.
-* 🧠 **Input Contextual Inteligente:** O programa adapta as perguntas ao usuário.
-    * *Ex:* Na Potenciação, pede "Base" e "Expoente".
-    * *Ex:* Na Divisão, pede "Dividendo" e "Divisor".
-* 💻 **Modo Bitwise Dedicado:**
-    * Ao selecionar operações lógicas (AND, OR, XOR), o teclado muda automaticamente para **Binário (0, 1, DEL)**.
-    * Conversão automática de binário para decimal e exibição em Hexadecimal.
-* 🎧 **Áudio:** Música de fundo integrada (*Escape From the City 8-bit*).
+### ✨ Diferenciais Implementados
+* **Interface Gráfica:** Substitui o loop de console "0 0" por uma aplicação visual interativa.
+* **Modularização:** Código organizado em múltiplos arquivos, com a `main` controlando o fluxo e exibição.
+* **UX Aprimorada:**
+    * **Teclado Binário:** Para as funções 8 a 12 (Bitwise) e 25 a 28 (Booleanas), a interface oferece inputs específicos (0 e 1).
+    * **Feedback Visual:** As entradas mudam de nome conforme a operação (ex: "Dividendo/Divisor" ou "Base/Expoente").
 
 ---
 
-# 🚀 Como Executar o Programa
+# 🚀 Como Executar
 
-### Pré-requisitos
-* Compilador GCC (MinGW no Windows).
-* Biblioteca [Raylib](https://github.com/raysan5/raylib/releases) instalada.
+Conforme as instruções, o código fonte está disponível, mas para facilitar a correção e o uso, disponibilizamos o executável.
 
-## 1️⃣ Configuração (Windows/MinGW)
+### ▶️ Execução Rápida (Windows)
+1. **Baixe o Repositório** (Botão `<> Code` -> `Download ZIP`).
+2. Extraia a pasta.
+3. Execute o arquivo **`Main.exe`**.
+   * *Não é necessário instalar bibliotecas externas para apenas rodar o programa.*
 
-Certifique-se de que a Raylib está na pasta padrão:
-`C:/raylib/`
-* `C:/raylib/include/raylib.h`
-* `C:/raylib/lib/libraylib.a`
+### 🛠️ Compilação (Para Desenvolvedores)
+Para compilar o código fonte (`.c`), é necessário ter o **GCC** e a biblioteca **Raylib** configurada (MinGW).
 
-## 2️⃣ Compilando pelo VS Code
-
-Crie o arquivo `.vscode/tasks.json` na raiz do projeto:
-
-```json
-{
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Compilar Calculadora",
-            "type": "shell",
-            "command": "gcc *.c -o Main.exe -I C:/raylib/include -L C:/raylib/lib -lraylib -lopengl32 -lgdi32 -lwinmm",
-            "group": "build",
-            "problemMatcher": []
-        }
-    ]
-}
-
+**Comando de compilação (Terminal):**
+```powershell
+gcc *.c -o Main.exe -I C:/raylib/include -L C:/raylib/lib -lraylib -lopengl32 -lgdi32 -lwinmm
 ```
-**Opção B: Compilar pelo VS Code**
-Use o atalho `Ctrl` + `Shift` + `B` (requer configuração do `tasks.json` incluído nas instruções de aula).
 
----
+# 🧮 Lista de Operações Implementadas
 
-# 🧮 Operações Implementadas (28 Funções)
-
-O código foi modularizado, onde cada integrante ficou responsável por um conjunto de operações (arquivos `.h`):
+O programa implementa rigorosamente as 28 funções solicitadas nas instruções, divididas por categorias:
 
 ### 1. Aritmética Básica & Avançada
-
-| Operação | Símbolo | Descrição |
-| :--- | :---: | :--- |
-| Soma, Subtração, Multiplicação, Divisão | `+` `-` `*` `/` | Operações fundamentais |
-| Resto | `%` | Módulo da divisão |
-| Potência | `^` | Base elevada ao expoente |
-| Fatorial | `!` | Fatorial de N |
-| Média | `M` | Média aritmética |
+| Nº | Operação | Símbolo | Exemplo |
+| :--- | :--- | :---: | :--- |
+| 1 | Soma | `+` | `1 + 2 = 3` |
+| 2 | Subtração | `-` | `5 - 9 = -4` |
+| 3 | Multiplicação | `*` | `9 * 5 = 45` |
+| 4 | Divisão | `/` | `9 / 4 = 2.250` |
+| 5 | Resto | `%` | `5 % 8 = 5` |
+| 6 | Potência | `~` | `9 ~ 2 = 81` |
+| 7 | Fatoração | `!` | `6 ! = 720` |
+| 13 | Média | `M` | `5 M 9 = 7.000` |
 
 ### 2. Bitwise (Manipulação de Bits)
-> *Possui teclado binário exclusivo na interface*
+*Entradas tratadas como inteiros, operados bit a bit.*
+| Nº | Operação | Símbolo | Descrição |
+| :--- | :--- | :---: | :--- |
+| 8 | AND bit a bit | `&` | `13 & 7 = 5` |
+| 9 | OR bit a bit | `\|` | `13 \| 7 = 15` |
+| 10 | XOR bit a bit | `^` | `13 ^ 7 = 10` |
+| 11 | Shift à direita | `>>` | `8 >> 2 = 2` |
+| 12 | Shift à esquerda | `<<` | `2 << 3 = 16` |
 
-| Operação | Descrição |
-| :--- | :--- |
-| **AND, OR, XOR** | Lógica bit a bit (com conversão binária automática) |
-| **Shift Left (<<)** | Deslocamento de bits para esquerda |
-| **Shift Right (>>)** | Deslocamento de bits para direita |
+### 3. Intervalos
+*O primeiro número é o início e o segundo é o fim do intervalo.*
+| Nº | Operação | Símbolo | Descrição |
+| :--- | :--- | :---: | :--- |
+| 14 | Somatório | `S` | Soma de todos os números no intervalo |
+| 15 | Produtório | `P` | Produto de todos os números no intervalo |
 
-### 3. Estatística & Intervalos
-* **Somatório (Σ):** Soma de um intervalo definido.
-* **Produtório (Π):** Produto de um intervalo definido.
+### 4. Comparações
+*Saída: 1 (SIM) ou 0 (NÃO), exceto min/max/abs.*
+| Nº | Operação | Símbolo | Descrição |
+| :--- | :--- | :---: | :--- |
+| 16 | Mínimo | `min` | Menor valor entre dois números |
+| 17 | Máximo | `max` | Maior valor entre dois números |
+| 18 | Valor Absoluto | `abs` | Módulo do número (positivo) |
+| 19 | Igualdade | `==` | Verifica se A é igual a B |
+| 20 | Diferença | `!=` | Verifica se A é diferente de B |
+| 21 | Maior que | `>` | Verifica se A > B |
+| 22 | Menor que | `<` | Verifica se A < B |
+| 23 | Maior ou Igual | `>=` | Verifica se A >= B |
+| 24 | Menor ou Igual | `<=` | Verifica se A <= B |
 
-### 4. Lógica & Comparação
-* **Comparadores:** Mínimo, Máximo, Absoluto, Igual, Diferente, Maior, Menor.
-* **Booleanas:** `AND`, `NAND`, `OR`, `NOR`.
+### 5. Operações Booleanas
+*Entradas obrigatórias: 0 ou 1. Saída: 1 (SIM) ou 0 (NÃO).*
+| Nº | Operação | Símbolo | Exemplo |
+| :--- | :--- | :---: | :--- |
+| 25 | AND Lógico | `&&` | `1 && 0 = NAO` |
+| 26 | NAND Lógico | `!&` | `1 !& 0 = SIM` |
+| 27 | OR Lógico | `\|\|` | `1 \|\| 0 = SIM` |
+| 28 | NOR Lógico | `!\|` | `1 !\| 0 = NAO` |
 
 ---
 
 # 👥 Integrantes do Grupo
 
-| Membro | GitHub | Responsabilidade Principal |
+| Membro | GitHub | Responsabilidade |
 | :--- | :--- | :--- |
-| **Aryan Douglas** | [@AryanDouglas01](https://github.com/AryanDouglas01) | Bitwise & Lógica de Shift |
+| **Aryan Douglas** | [@AryanDouglas01](https://github.com/AryanDouglas01) | Bitwise & Shifts |
 | **Clara Bertão** | [@clarabertao](https://github.com/clarabertao) | Funções Avançadas |
-| **Eduarda Campos** | [@EduardaCCampos](https://github.com/EduardaCCampos) | Interface & Lógica Booleana |
-| **Júlia Coité** | [@juliacoit](https://github.com/juliacoit) | Interface Gráfica, Integração & UX, Comparadores lógicos|
+| **Eduarda Campos** | [@EduardaCCampos](https://github.com/EduardaCCampos) | Booleanas & Interface |
+| **Júlia Coité** | [@juliacoit](https://github.com/juliacoit) | Interface Gráfica, Comparadores Lógicos |
 | **Paulo Vitor** | [@Paulim16](https://github.com/Paulim16) | Intervalos & Estatística |
 | **Pedro Lukas** | [@pedro-lukas-git](https://github.com/pedro-lukas-git) | Operações Básicas |
 | **Sarah Godinho** | [@Sarocaa](https://github.com/Sarocaa) | Comparadores Lógicos |
@@ -108,7 +110,9 @@ O código foi modularizado, onde cada integrante ficou responsável por um conju
 ---
 
 # 🔗 Repositório Oficial
-👉 **[Acesse no GitHub](https://github.com/juliacoit/Mini-Projeto-IP)**
+Todo o desenvolvimento e versionamento foi realizado na plataforma GitHub, conforme as instruções.
+
+👉 **[Acesse o Repositório Aqui](https://github.com/juliacoit/Mini-Projeto-IP)**
 
 ---
-*UFG - 2025/2*
+*UFG - Instituto de Informática - 2025/2*
