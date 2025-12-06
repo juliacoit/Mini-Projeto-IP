@@ -36,6 +36,8 @@ Para compilar o código fonte (`.c`), é necessário ter o **GCC** e a bibliotec
 ```powershell
 gcc *.c -o Main.exe -I C:/raylib/include -L C:/raylib/lib -lraylib -lopengl32 -lgdi32 -lwinmm
 ```
+---
+
 # 🔗 Link do Projeto
 Todo o desenvolvimento e versionamento foi realizado na plataforma GitHub, conforme as instruções.
 
