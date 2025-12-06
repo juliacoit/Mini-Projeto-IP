@@ -100,7 +100,7 @@ O código foi modularizado, onde cada integrante ficou responsável por um conju
 | **Aryan Douglas** | [@AryanDouglas01](https://github.com/AryanDouglas01) | Bitwise & Lógica de Shift |
 | **Clara Bertão** | [@clarabertao](https://github.com/clarabertao) | Funções Avançadas |
 | **Eduarda Campos** | [@EduardaCCampos](https://github.com/EduardaCCampos) | Interface & Lógica Booleana |
-| **Júlia Coité** | [@juliacoit](https://github.com/juliacoit) | Interface Gráfica, Integração & UX |
+| **Júlia Coité** | [@juliacoit](https://github.com/juliacoit) | Interface Gráfica, Integração & UX, Comparadores lógicos|
 | **Paulo Vitor** | [@Paulim16](https://github.com/Paulim16) | Intervalos & Estatística |
 | **Pedro Lukas** | [@pedro-lukas-git](https://github.com/pedro-lukas-git) | Operações Básicas |
 | **Sarah Godinho** | [@Sarocaa](https://github.com/Sarocaa) | Comparadores Lógicos |
